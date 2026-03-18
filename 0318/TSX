@@ -1,0 +1,35 @@
+# 📘 TSX (TypeScript XML) 완벽 정리
+
+> **한 줄 요약**: TSX는 "TypeScript의 강력한 타입 체크"와 "React의 JSX 문법"이 결합된 형태입니다.
+
+---
+
+### 🗺️ Summary Map: 기술 계층 구조
+TSX는 현대 웹 개발의 표준인 React와 TypeScript가 만난 형태입니다.
+* **JavaScript (JS)**: 웹의 근간이 되는 기본 프로그래밍 언어
+* **JSX (JavaScript XML)**: JS 내에서 HTML 구조를 작성할 수 있게 해주는 확장 문법
+* **TypeScript (TS)**: JS에 '타입(Type)' 시스템을 더해 안정성을 높인 언어
+* **TSX (TypeScript XML)**: **JSX + TypeScript**의 결합체 (React 프로젝트의 필수 확장자)
+
+---
+
+### 1️⃣ TSX란 무엇인가?
+TSX는 **React에서 TypeScript를 사용할 때 쓰는 파일 확장자(`.tsx`)**입니다. 기존 JSX 문법을 그대로 사용하면서, 각 컴포넌트가 주고받는 데이터(Props)나 상태(State)의 타입을 엄격하게 정의할 수 있습니다.
+
+### 2️⃣ 주요 특징 및 장점
+| 특징 | 내용 | 효과 |
+| :--- | :--- | :--- |
+| **정적 타입 체크** | 컴포넌트 간 전달되는 데이터 타입을 미리 검사 | 런타임 에러(실행 중 오류) 방지 |
+| **인텔리센스 (IntelliSense)** | 코드 작성 시 자동 완성 및 API 가이드 제공 | 개발 속도 향상 및 오타 감소 |
+| **가속성 및 유지보수** | 데이터 구조가 명시되어 있어 협업 시 유리 | 코드의 의도를 명확히 전달 |
+
+---
+
+### 3️⃣ 코드 예시 (Before & After)
+
+#### ❌ 기존 JSX (`.jsx`)
+```javascript
+// 타입을 알 수 없어 name에 숫자가 들어와도 실행 전에는 알 수 없음
+const Welcome = ({ name }) => {
+  return <h1>Hello, {name}</h1>;
+};
