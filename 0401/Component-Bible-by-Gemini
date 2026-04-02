@@ -1,0 +1,55 @@
+# 🧩 Component Design Patterns & Principles
+
+> **한 줄 요약**: 독립성과 재사용성을 극대화하여 유지보수가 쉬운 UI 구조 설계하기
+
+---
+
+## 🗺️ [요약 맵]
+* **컴포넌트의 본질**: UI를 독립적이고 재사용 가능한 단위로 쪼갠 것
+* **핵심 설계 원칙**: 단일 책임 원칙(SRP), 관심사 분리(SoC)
+* **고급 패턴**: Props Drilling 해결 및 디자인 시스템 구축
+* **실무 역량**: 최적화(Memoization) 및 예외 처리(Exception Handling)
+
+---
+
+### 1️⃣ 컴포넌트 설계의 핵심 이론 (Conceptual Depth)
+
+#### 🔹 아토믹 디자인 패턴 (Atomic Design)
+UI를 가장 작은 단위인 원자(Atoms)부터 유기체(Organisms)까지 계층적으로 나누어 관리합니다.
+* **Atoms**: Button, Input, Label 등 더 이상 쪼갤 수 없는 최소 단위
+* **Molecules**: 검색창(Input + Button) 등 원자들의 조합
+* **Organisms**: 헤더, 네비게이션 바 등 복잡한 서비스 단위
+
+
+
+#### 🔹 합성(Composition) 모델
+React가 권장하는 방식으로, 상속 대신 다른 컴포넌트를 자식(`children`)으로 받아 유연하게 UI를 구성합니다.
+* **장점**: 컴포넌트 간의 결합도를 낮추고 재사용성을 높임.
+
+---
+
+### 2️⃣ 실무형 컴포넌트 관리 (Engineering Practice)
+
+#### 🔹 Clean Code Rules
+* **직관적인 영문 변수명**: 
+    * `isVisible`, `hasToken` (상태값: Boolean)
+    * `handleButtonClick`, `onClose` (이벤트 핸들러: Function)
+* **Early Return 패턴**: 
+    ```javascript
+    // 데이터가 없으면 로직을 실행하지 않고 미리 종료 (가독성 향상)
+    if (!user) return <LoadingSpinner />;
+    return <UserProfile data={user} />;
+    ```
+
+#### 🔹 예외 처리 및 UX (Exception Handling)
+* **Error Boundary**: 하위 컴포넌트의 런타임 에러가 전체 앱을 중단시키지 않도록 격리.
+* **Fallback UI**: 에러 발생 시 "잠시 후 다시 시도해주세요"와 같은 친절한 안내 메시지 제공.
+
+#### 🔹 성능 최적화 (Optimization)
+* **React.memo**: 부모가 리렌더링될 때 자식이 불필요하게 다시 그려지는 것 방지.
+* **useCallback / useMemo**: 함수나 연산 값이 변하지 않았다면 메모리에서 재사용하여 연산 낭비 최소화.
+
+---
+
+### 💡 SW Mentor's Advice (리팩토링 제안)
+"단순한 UI 쪼개기를 넘어 **Presentational & Container 패턴**을 고려해보세요. 데이터 처리는 부모(Container)가, 화면 렌더링은 자식(Presentational)이 담당하면 UI만 바꾸고 싶을 때 로직을 건드릴 필요가 없어 훨씬 효율적입니다!"
