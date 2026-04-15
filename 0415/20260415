@@ -1,0 +1,84 @@
+import { useState } from 'react';
+
+// 카운터 컴포넌트
+function Counter() {
+  const [count, setCount] = useState(0);
+  function handleClick() {
+    setCount(count + 1);
+  }
+  return (
+    <div style={cardStyle}>
+      <h3>1. Counter</h3>
+      <button onClick={handleClick}>You pressed me {count} times</button>
+    </div>
+  );
+}
+
+// 텍스트 입력 컴포넌트
+function MyInput() {
+  const [text, setText] = useState('hello');
+  function handleChange(e) {
+    setText(e.target.value);
+  }
+  return (
+    <div style={cardStyle}>
+      <h3>2. Input</h3>
+      <input value={text} onChange={handleChange} />
+      <p>You typed: {text}</p>
+      <button onClick={() => setText('hello')}>Reset</button>
+    </div>
+  );
+}
+
+// 체크박스 컴포넌트
+function MyCheckbox() {
+  const [liked, setLiked] = useState(true);
+  function handleChange(e) {
+    setLiked(e.target.checked);
+  }
+  return (
+    <div style={cardStyle}>
+      <h3>3. Checkbox</h3>
+      <label>
+        <input type="checkbox" checked={liked} onChange={handleChange} />
+        I liked this
+      </label>
+      <p>You {liked ? 'liked' : 'did not like'} this.</p>
+    </div>
+  );
+}
+
+// 여러 상태 컴포넌트
+function Form() {
+  const [name, setName] = useState('Taylor');
+  const [age, setAge] = useState(42);
+  return (
+    <div style={cardStyle}>
+      <h3>4. Form</h3>
+      <input value={name} onChange={e => setName(e.target.value)} />
+      <button onClick={() => setAge(age + 1)}>Increment age</button>
+      <p>Hello, {name}. You are {age}.</p>
+    </div>
+  );
+}
+
+// 메인 App 컴포넌트
+export default function App() {
+  return (
+    <div style={{ padding: '20px', fontFamily: 'sans-serif' }}>
+      <h1>React useState Examples</h1>
+      <Counter />
+      <MyInput />
+      <MyCheckbox />
+      <Form />
+    </div>
+  );
+}
+
+const cardStyle = {
+  border: '1px solid #ddd',
+  borderRadius: '8px',
+  padding: '15px',
+  marginBottom: '15px',
+  backgroundColor: '#f9f9f9'
+};
